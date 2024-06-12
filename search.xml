@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>周报汇总（持续更新）</title>
+      <link href="/2024/06/11/%E5%91%A8%E6%8A%A5%E6%B1%87%E6%80%BB/"/>
+      <url>/2024/06/11/%E5%91%A8%E6%8A%A5%E6%B1%87%E6%80%BB/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Week-1"><a href="#Week-1" class="headerlink" title="Week 1"></a>Week 1</h2><h3 id="6-8"><a href="#6-8" class="headerlink" title="6.8"></a>6.8</h3><p><a href="https://whatasmallship.github.io/2024/06/10/index2/">Principles of Large-Scale Machine Learning [Lecture1、2]</a></p><blockquote><p>Estimating the empirical risk with samples</p><ul><li><p>Empirical Risk介绍</p></li><li><p>计算加速措施：并行化、小批量梯度下降、硬件加速、近似计算</p></li><li><p>近似计算Empirical Risk的原理</p><ul><li><p>子采样</p><p>引入随机变量 Z，代表随机采样一个样本的损失值。多次独立地抽取 Z 的样本，这些样本的平均值将近似于经验风险 R<del>emp</del>。</p></li><li><p>大数定律</p><p>根据统计学原理，一组独立随机变量的平均值往往聚集在该随机变量的期望值周围。</p></li><li><p>中心极限定理</p><p>随着我们采样更多的 Z，样本平均值会越来越接近真实的期望值。</p></li><li><p>集中不等式</p><p>随机变量 Z 集中在某个取值附近的概率：马尔可夫不等式、切比雪夫不等式、<a href="https://zhuanlan.zhihu.com/p/693707616?utm_campaign=shareopn&utm_content=group3_article&utm_medium=social&utm_psn=1765879860495740928&utm_source=wechat_session">霍夫丁不等式</a>。</p></li></ul></li></ul></blockquote><h3 id="6-10"><a href="#6-10" class="headerlink" title="6.10"></a>6.10</h3><p>PyTorch</p><blockquote><ol><li>tensor_tutorial</li></ol><ul><li>初始化</li><li>属性：shape、dtype、device等</li><li>操作：转置、索引、切分等</li></ul><ol start="2"><li>autograd_tutorial</li></ol><ul><li>神经网络简介：前馈与反馈、误差与梯度计算</li><li>autograd在神经网络中的使用：backward()</li><li>autograd原理、计算图、取消autograd的方式</li></ul></blockquote><h3 id="6-11"><a href="#6-11" class="headerlink" title="6.11"></a>6.11</h3><p>PyTorch</p><blockquote><p>torch.nn使用（函数原型、参数含义、原理、实例）</p><ol><li>torch.nn.Linear</li><li>torch.nn.Conv2d</li><li>torch.nn.MaxPool2d</li></ol></blockquote><p><a href="https://whatasmallship.github.io/2024/06/11/CNN-1/">卷积神经网络</a></p><blockquote><ol><li>多层感知机在图像处理上的局限性</li><li>人类视觉原理</li><li>卷积神经网络基本原理</li></ol></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Learning-Record </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 这孩子打小就聪明 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CNN(1)</title>
+      <link href="/2024/06/11/CNN-1/"/>
+      <url>/2024/06/11/CNN-1/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>多层感知机十分适合处理表格数据，其中行对应样本，列对应特征。然而对于高维感知数据（图像），这种缺少结构的网络可能会变得不实用。</p></blockquote><h4 id="图像处理的问题"><a href="#图像处理的问题" class="headerlink" title="图像处理的问题"></a>图像处理的问题</h4><ol><li><p>图像需要处理的数据量太大，导致成本很高，效率很低</p><blockquote><p>图像是由像素构成的，每个像素又是由颜色构成的。如果一张图片像素为1000×1000，每个像素有RGB三个信息表示颜色信息，则一张图片需要处理三百万个参数。</p></blockquote><blockquote><p><strong>CNN 解决的第一个问题就是「将复杂问题简化」，把大量参数降维成少量参数，再做处理。</strong>我们在大部分场景下，降维并不会影响结果。比如1000像素的图片缩小成200像素，并不影响肉眼认出来图片中是一只猫还是一只狗，机器也是如此。</p></blockquote></li><li><p>图像在数字化的过程中很难保留原有的特征，导致图像处理的准确率不高</p><blockquote><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog@master/wallpaper/98412-2019-06-12-tuxiangtx.png" alt="98412-2019-06-12-tuxiangtx"></p><p>假如有圆形是1，没有圆形是0，那么圆形的位置不同就会产生完全不同的数据表达。但是从视觉的角度来看，<strong>图像的内容（本质）并没有发生变化，只是位置发生了变化</strong>。</p></blockquote><blockquote><p><strong>CNN用类似视觉的方式保留了图像的特征，当图像做翻转，旋转或者变换位置时，它也能有效的识别出来是类似的图像。</strong></p></blockquote></li></ol><h4 id="人类视觉原理"><a href="#人类视觉原理" class="headerlink" title="人类视觉原理"></a>人类视觉原理</h4><ul><li>从原始信号摄入开始（瞳孔摄入像素 Pixels）</li><li>做初步处理（大脑皮层某些细胞发现边缘和方向）</li><li>抽象（大脑判定，眼前物体的形状，是圆形的）</li><li>进一步抽象（大脑进一步判定该物体是只气球）</li></ul><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog@master/wallpaper/d447a-2019-06-19-renlei-shijue2.jpg" alt="d447a-2019-06-19-renlei-shijue2"></p><h4 id="卷积神经网络基本原理"><a href="#卷积神经网络基本原理" class="headerlink" title="卷积神经网络基本原理"></a>卷积神经网络基本原理</h4><blockquote><p>典型的 CNN 由3个部分构成：</p><ol><li><strong>卷积层</strong>负责提取图像中的局部特征</li><li><strong>池化层</strong>用来大幅降低参数量级（降维）</li><li><strong>全连接层</strong>类似传统神经网络的部分，用来输出想要的结果</li></ol></blockquote><h5 id="卷积：提取特征"><a href="#卷积：提取特征" class="headerlink" title="卷积：提取特征"></a>卷积：提取特征</h5><blockquote><p>使用一个过滤器（卷积核）来过滤图像的各个小区域，从而得到这些小区域的特征值。</p></blockquote><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog@master/wallpaper/f144f-2019-06-19-juanji.gif" alt="f144f-2019-06-19-juanji"></p><p>具体应用中，往往有多个卷积核，可以认为，<font color = "blue"><strong>每个卷积核代表了一种图像模式，如果某个图像块与此卷积核卷积出的值大，则认为此图像块十分接近于此卷积核</strong>。</font></p><p>如果我们设计了6个卷积核，可以理解为：我们认为这个图像上有6种底层纹理模式，也就是我们用6中基础模式就能描绘出一副图像。</p><h5 id="池化层（下采样）：数据降维，避免过拟合"><a href="#池化层（下采样）：数据降维，避免过拟合" class="headerlink" title="池化层（下采样）：数据降维，避免过拟合"></a>池化层（下采样）：数据降维，避免过拟合</h5><hr><p>下图示例中：原始图片大小为20×20，对其进行下采样，采样窗口为10×10，最终将其下采样成为一个2×2大小的特征图。</p><p>对于每个窗口，挑选出最大的数值作为结果。</p><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog@master/wallpaper/3fd53-2019-06-19-chihua.gif" alt="3fd53-2019-06-19-chihua"></p><h5 id="全连接层：输出结果"><a href="#全连接层：输出结果" class="headerlink" title="全连接层：输出结果"></a>全连接层：输出结果</h5><blockquote><p>经过卷积层和池化层降维过的数据，全连接层才能”跑得动”，不然数据量太大，计算成本高，效率低下。</p></blockquote><h5 id="LeNet-5"><a href="#LeNet-5" class="headerlink" title="LeNet-5"></a>LeNet-5</h5><blockquote><p>典型的卷积神经网络，其结构为：</p><p>卷积层 – 池化层- 卷积层 – 池化层 – 卷积层 – 全连接层</p></blockquote><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog@master/wallpaper/a8f0b-2019-06-19-lenet.png" alt="a8f0b-2019-06-19-lenet"></p><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>卷积核是神经网络自己训练出来的，相当于一种“图像模式”，模型通过训练，得到一些特定的“图像模式”。训练好的模型通过这样的“知识”，来判断没有经过验证的图片的类型。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Basic-ML </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CNN </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Large-Scale ML [lecture 1&#92;2]</title>
+      <link href="/2024/06/10/index2/"/>
+      <url>/2024/06/10/index2/</url>
+      
+        <content type="html"><![CDATA[<h2 id="lecture-1"><a href="#lecture-1" class="headerlink" title="lecture 1"></a>lecture 1</h2><ol><li><p>标准机器学习过程</p><ul><li>数据收集和准备：数据收集、数据清洗和预处理（处理缺失值、去除噪声、处理异常值；归一化、特征提取等）</li><li>模型选择与训练：根据问题类型选择适当的模型类型（如线性回归、决策树、神经网络等）</li><li>validation</li><li>test</li><li>deployment</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Q：validation和test的区别？</span><br><span class="line">A：验证阶段主要用于模型的调优，包括选择最佳的超参数和避免过拟合。测试阶段主要用于评估模型的最终性能，衡量模型在未见过的数据上的泛化能力。</span><br></pre></td></tr></table></figure></li><li><p>扩展到大数据上的难点</p><ul><li><p>实时数据</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Q：具体指什么？ss</span><br><span class="line">A：实时数据是指一些应用场景下的数据，数据持续到来，意味着数据集是变化的。比如物联网的感知场景、视频/广告点击率预测场景、天气预测场景。</span><br></pre></td></tr></table></figure></li><li><p>模型选择，更大范围的参数调整</p></li><li><p>大型数据集上的训练时间</p></li><li><p>对延迟、吞吐量和内存使用有要求的情况下，模型怎么推理和部署</p></li></ul></li><li><p>在扩展机器学习时，应该遵守的原则</p><blockquote><p>使用三个方向的技术：统计学、最优化、系统架构？</p></blockquote><ul><li><p>统计学：通过处理小型随机子样本，可以更轻松地处理大型数据集。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">具体指什么？</span><br></pre></td></tr></table></figure></li><li><p>最优化：将您的学习任务编写为优化问题，并通过迭代更新模型的快速算法来解决它。</p></li><li><p>并行系统与计算机架构：硬件与算法需要相互匹配。</p><p>为扩大规模利用并行和分布式系统形式的额外计算，机器学习计算特别适合专用硬件，例如 GPU</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Q：摩尔定理的具体内容？为什么说摩尔定律将不再适用？</span><br><span class="line">A：我们不能再指望通过等待两年让 CPU 速度提高两倍来提高性能和可扩展性</span><br></pre></td></tr></table></figure></li></ul></li><li><p>课程目标</p><ul><li>通过二次采样快速估计数据统计量</li><li>通过随机梯度下降 (SGD) 进行快速、可扩展的学习</li><li>用于改进SGD 的优化技术。小批量、动量、自适应学习率。</li><li>深度学习框架和自动微分。</li><li>模型选择和超参数优化。</li><li>并行和分布式培训。</li><li>量化、模型压缩和其他快速推理方法。</li></ul></li></ol><h2 id="lecture-2"><a href="#lecture-2" class="headerlink" title="lecture 2"></a>lecture 2</h2><p><strong>Estimating the empirical risk with samples</strong>：机器学习中的大多数错误或准确度都可以通过经验风险来捕获。</p><ol><li><p>经验风险</p><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog@master/wallpaper/image-20241.png"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Q：函数L怎么理解？</span><br><span class="line">A：输入表示一个笛卡尔积，如果Y是一个集合，则Y×Y表示从Y中选取的两个元素组成的所有可能的有序对。也即，Y×Y是一个包含所有（y1,y2）形式的有序对的集合，其中y1和y2都是Y的元素。所以，该函数接受一个来自Y×Y集合的有序对作为输入，并输出一个实数。在二分类问题中，L为0-1损失函数；线性回归问题中，L可能是均方误差损失函数MSE。</span><br><span class="line">Q：经验风险函数跟L的关系？</span><br><span class="line">A：从上图公式看，L计算单个样本的损失，R计算所有样本损失的平均值。</span><br></pre></td></tr></table></figure></li><li><p>如何对经验风险的计算进行扩展</p><ul><li><p>与计算开销相关的因素</p><ul><li>样本总数n，成本与n成正比：通常经验风险计算不会占用额外的空间，因为只是计算一个标量（损失的平均值），但在某些情况下，可能需要存储中间结果或梯度信息。</li><li>损失函数L的计算成本：损失函数的复杂度也会影响计算经验风险的效率。简单的损失函数（如均方误差）计算速度较快，而复杂的损失函数（如对比损失或自定义损失函数）可能需要更多的计算资源。</li><li>评估预测器h的成本：模型的复杂度也会影响计算经验风险的效率。复杂模型（如深度神经网络）通常需要更多的计算资源来计算每个样本的预测结果。</li></ul></li><li><p>措施</p><ul><li><p>通过并行化来提高计算效率</p><blockquote><p>数据并行化：数据集划分，在多个计算节点上并行计算每个块的损失，最后合并结果</p><p>模型并行化：模型的不同部分在不同的计算资源上并行计算</p></blockquote></li><li><p>小批量提速下降：每次只计算一个小批量数据的损失</p></li><li><p>硬件加速：利用 GPU 或 TPU 等硬件加速器来并行计算</p></li><li><p>近似计算：使用subsampling来近似计算经验风险，具体见第3点。</p></li></ul></li></ul></li><li><p>近似计算经验风险</p><ul><li>引入随机变量 Z。这个随机变量 Z 代表从经验风险的求和公式中随机采样一个元素的损失值。</li></ul><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608131448887.png"></p><ul><li>多次独立地抽取 Z 的样本，这些样本的平均值将近似于经验风险 R<del>emp</del></li></ul><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608132251370.png"></p><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608131811334.png"></p><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608132503301.png"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Q：E[Z]是什么意思？</span><br><span class="line">A：表示Z的数学期望。数学期望的定义回顾在上图中。</span><br></pre></td></tr></table></figure><ul><li><p>近似计算的开销与样本总数n有关系吗？</p><p>根据统计学原理，一组独立随机变量的平均值往往聚集在该随机变量的期望值周围，可以形式化地表述为（强大数定律）：</p><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608133219032.png"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Q：大数定律？</span><br><span class="line">A：描述相当多次数重复实验的结果的定律。根据这个定律知道，样本数量越多，则其算术平均值就有越高的概率接近期望。大数定律主要有两种表现形式：弱大数定律和强大数定律。定律的两种形式都肯定无疑地表明，样本均值收敛于真值。具体在下图。</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608133516733.png"></p></li><li><p>平均值的分布：中心极限定理，当我们有一组独立同分布的随机变量且这些随机变量具有有限的均值和方差时，当抽样次数足够大时，这些随机变量的标准化和中心化的和将近似服从正态分布。N（0，Var(Z)）是一个正态分布，其平均值μ&#x3D;0，方差为Var(Z)。换句话说，随着我们采样更多的 Z，样本平均值会越来越接近真实的期望值 E[Z]，且这种接近的误差按照正态分布分布，其方差随着 K 增加而减小。</p><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608142524378.png"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Q：这个式子怎么形象理解？</span><br><span class="line">A：如下图（标准化后的经验风险误差的分布情况）。横轴表示标准化后的经验风险的误差值，即上图左边的式子，这是抽样平均值与真实期望值之间的差距，经过标准化处理后的值。纵轴表示概率密度，这个值表示在某个误差值附近的概率密度，反映了误差值出现在该范围内的可能性。综上所述，根据中心极限定理，当样本数量足够大时，标准化后的经验风险误差值将趋于图中的正态分布。正态分布的均值为 0，意味着在大量抽样的情况下，经验风险的近似值会围绕真实期望值波动，且平均误差为 0。正态分布的标准差由Var(Z)决定，表示误差的分散程度。标准差越大，分布越宽，意味着误差波动越大；标准差越小，分布越窄，误差波动越小。</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608143232146.png"></p></li><li><p>需要多长时间才能得到合适的近似值？</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Q：不太理解，这里概率不等式的意义是什么？为了证明近似计算的正确性，还是为了应用？</span><br></pre></td></tr></table></figure><blockquote><p>浓度不等式：能够限制一个有限总和偏离其期望值的概率。</p><p>马尔可夫不等式：如果S是一个非负的随机变量，且具有有限的期望值，则对于任意a&gt;0都有<img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608144503523.png"></p><p>切比雪夫不等式：如果S是一个非负的随机变量，且具有有限的期望值，则对于任意a&gt;0都有<img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608144712705.png"></p><p>霍夫丁不等式：切比雪夫不等式的一个问题，给出的概率并不够小。虽然我们知道这些总和逐渐接近类似高斯分布的东西，但我们期望从期望值偏离一定程度的概率会随着 a 的增加呈指数级下降，因为这是高斯分布的性质。霍夫丁不等式给出了总和尾部概率的一个更紧密的界限。</p><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608145854077.png"></p><p>其他不等式</p><ul><li>Azuma’s：对非独立同分布也适用</li><li>Bennett’s：结合了绝对边界和方差的信息，提供了更紧凑的界限。</li></ul></blockquote></li></ul></li><li><p>想想？</p><p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608150354611.png"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Q：怎么才能得到一个比较好的近似？又需要多少次抽样才能得到这种程度的近似？</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> ML </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> Statistics </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Instruction</title>
+      <link href="/2024/06/01/index/"/>
+      <url>/2024/06/01/index/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/20200303233425_fodzi.jpg"></p><div style="position: relative; padding: 30% 45%;"><iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;" src="https://player.bilibili.com/player.html?isOutside=true&aid=35953658&bvid=BV18t41127YH&cid=63107176&page=1&as_wide=1&high_quality=1&danmaku=0" frameborder="no" scrolling="no" allowfullscreen= "ture"></iframe></div><hr><blockquote><p>aid和bvid估计是视频id<br>cid应该是客户端id，删去也不影响链接视频播放<br>page表示是选集里的第几个视频<br>as_wide表示是否为宽屏<br>high_quality表示是否高清<br>danmaku表示是否开启弹幕<br>allowfullscreen&#x3D;”ture”允许全屏</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 杂七杂八 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 视频插入 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2024/06/01/hello-world/"/>
+      <url>/2024/06/01/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
