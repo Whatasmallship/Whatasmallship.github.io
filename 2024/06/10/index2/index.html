@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Large-Scale ML [lecture 1\2] | 干点啥好呢</title><meta name="author" content="Me"><meta name="copyright" content="Me"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="lecture 1 标准机器学习过程  数据收集和准备：数据收集、数据清洗和预处理（处理缺失值、去除噪声、处理异常值；归一化、特征提取等） 模型选择与训练：根据问题类型选择适当的模型类型（如线性回归、决策树、神经网络等） validation test deployment  12Q：validation和test的区别？A：验证阶段主要用于模型的调优，包括选择最佳的超参数和避免过拟合。测试阶段主">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Large-Scale ML [lecture 1\2] | 干点啥好呢</title><meta name="author" content="Me"><meta name="copyright" content="Me"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="lecture 1   标准机器学习过程  数据收集和准备：数据收集、数据清洗和预处理（处理缺失值、去除噪声、处理异常值；归一化、特征提取等） 模型选择与训练：根据问题类型选择适当的模型类型（如线性回归、决策树、神经网络等） validation test deployment  12Q：validation和test的区别？A：验证阶段主要用于模型的调优，包括选择最佳的超参数和避免过拟合。测试阶">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Large-Scale ML [lecture 1\2]">
 <meta property="og:url" content="http://example.com/2024/06/10/index2/">
 <meta property="og:site_name" content="干点啥好呢">
-<meta property="og:description" content="lecture 1 标准机器学习过程  数据收集和准备：数据收集、数据清洗和预处理（处理缺失值、去除噪声、处理异常值；归一化、特征提取等） 模型选择与训练：根据问题类型选择适当的模型类型（如线性回归、决策树、神经网络等） validation test deployment  12Q：validation和test的区别？A：验证阶段主要用于模型的调优，包括选择最佳的超参数和避免过拟合。测试阶段主">
+<meta property="og:description" content="lecture 1   标准机器学习过程  数据收集和准备：数据收集、数据清洗和预处理（处理缺失值、去除噪声、处理异常值；归一化、特征提取等） 模型选择与训练：根据问题类型选择适当的模型类型（如线性回归、决策树、神经网络等） validation test deployment  12Q：validation和test的区别？A：验证阶段主要用于模型的调优，包括选择最佳的超参数和避免过拟合。测试阶">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg">
 <meta property="article:published_time" content="2024-06-09T16:00:00.000Z">
@@ -154,8 +154,10 @@
         }
       }
       detectApple()
-    })(window)</script><meta name="generator" content="Hexo 7.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="干点啥好呢"><span class="site-name">干点啥好呢</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Large-Scale ML [lecture 1\2]</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-09T16:00:00.000Z" title="发表于 2024-06-10 00:00:00">2024-06-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-12T06:23:04.434Z" title="更新于 2024-06-12 14:23:04">2024-06-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ML/">ML</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="lecture-1"><a href="#lecture-1" class="headerlink" title="lecture 1"></a>lecture 1</h2><ol>
-<li><p>标准机器学习过程</p>
+    })(window)</script><meta name="generator" content="Hexo 7.2.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="干点啥好呢"><span class="site-name">干点啥好呢</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Large-Scale ML [lecture 1\2]</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-09T16:00:00.000Z" title="发表于 2024-06-10 00:00:00">2024-06-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-12T06:23:04.434Z" title="更新于 2024-06-12 14:23:04">2024-06-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ML/">ML</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="lecture-1">lecture 1</h2>
+<ol>
+<li>
+<p>标准机器学习过程</p>
 <ul>
 <li>数据收集和准备：数据收集、数据清洗和预处理（处理缺失值、去除噪声、处理异常值；归一化、特征提取等）</li>
 <li>模型选择与训练：根据问题类型选择适当的模型类型（如线性回归、决策树、神经网络等）</li>
@@ -165,35 +167,46 @@
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Q：validation和test的区别？</span><br><span class="line">A：验证阶段主要用于模型的调优，包括选择最佳的超参数和避免过拟合。测试阶段主要用于评估模型的最终性能，衡量模型在未见过的数据上的泛化能力。</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>扩展到大数据上的难点</p>
+<li>
+<p>扩展到大数据上的难点</p>
 <ul>
-<li><p>实时数据</p>
+<li>
+<p>实时数据</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Q：具体指什么？ss</span><br><span class="line">A：实时数据是指一些应用场景下的数据，数据持续到来，意味着数据集是变化的。比如物联网的感知场景、视频/广告点击率预测场景、天气预测场景。</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>模型选择，更大范围的参数调整</p>
+<li>
+<p>模型选择，更大范围的参数调整</p>
 </li>
-<li><p>大型数据集上的训练时间</p>
+<li>
+<p>大型数据集上的训练时间</p>
 </li>
-<li><p>对延迟、吞吐量和内存使用有要求的情况下，模型怎么推理和部署</p>
+<li>
+<p>对延迟、吞吐量和内存使用有要求的情况下，模型怎么推理和部署</p>
 </li>
 </ul>
 </li>
-<li><p>在扩展机器学习时，应该遵守的原则</p>
+<li>
+<p>在扩展机器学习时，应该遵守的原则</p>
 <blockquote>
 <p>使用三个方向的技术：统计学、最优化、系统架构？</p>
 </blockquote>
 <ul>
-<li><p>统计学：通过处理小型随机子样本，可以更轻松地处理大型数据集。</p>
+<li>
+<p>统计学：通过处理小型随机子样本，可以更轻松地处理大型数据集。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">具体指什么？</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>最优化：将您的学习任务编写为优化问题，并通过迭代更新模型的快速算法来解决它。</p>
+<li>
+<p>最优化：将您的学习任务编写为优化问题，并通过迭代更新模型的快速算法来解决它。</p>
 </li>
-<li><p>并行系统与计算机架构：硬件与算法需要相互匹配。</p>
+<li>
+<p>并行系统与计算机架构：硬件与算法需要相互匹配。</p>
 <p>为扩大规模利用并行和分布式系统形式的额外计算，机器学习计算特别适合专用硬件，例如 GPU</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Q：摩尔定理的具体内容？为什么说摩尔定律将不再适用？</span><br><span class="line">A：我们不能再指望通过等待两年让 CPU 速度提高两倍来提高性能和可扩展性</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Q：摩尔定理的具体内容？为什么说摩尔定律将不再适用？</span><br><span class="line">A：我们不能再指望通过等待两年让 CPU 速度提高两倍来提高性能和可扩展性</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
-<li><p>课程目标</p>
+<li>
+<p>课程目标</p>
 <ul>
 <li>通过二次采样快速估计数据统计量</li>
 <li>通过随机梯度下降 (SGD) 进行快速、可扩展的学习</li>
@@ -205,75 +218,84 @@
 </ul>
 </li>
 </ol>
-<h2 id="lecture-2"><a href="#lecture-2" class="headerlink" title="lecture 2"></a>lecture 2</h2><p><strong>Estimating the empirical risk with samples</strong>：机器学习中的大多数错误或准确度都可以通过经验风险来捕获。</p>
+<h2 id="lecture-2">lecture 2</h2>
+<p><strong>Estimating the empirical risk with samples</strong>：机器学习中的大多数错误或准确度都可以通过经验风险来捕获。</p>
 <ol>
-<li><p>经验风险</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog@master/wallpaper/image-20241.png"></p>
+<li>
+<p>经验风险</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog@master/wallpaper/image-20241.png" alt=""></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Q：函数L怎么理解？</span><br><span class="line">A：输入表示一个笛卡尔积，如果Y是一个集合，则Y×Y表示从Y中选取的两个元素组成的所有可能的有序对。也即，Y×Y是一个包含所有（y1,y2）形式的有序对的集合，其中y1和y2都是Y的元素。所以，该函数接受一个来自Y×Y集合的有序对作为输入，并输出一个实数。在二分类问题中，L为0-1损失函数；线性回归问题中，L可能是均方误差损失函数MSE。</span><br><span class="line">Q：经验风险函数跟L的关系？</span><br><span class="line">A：从上图公式看，L计算单个样本的损失，R计算所有样本损失的平均值。</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>如何对经验风险的计算进行扩展</p>
+<li>
+<p>如何对经验风险的计算进行扩展</p>
 <ul>
-<li><p>与计算开销相关的因素</p>
+<li>
+<p>与计算开销相关的因素</p>
 <ul>
 <li>样本总数n，成本与n成正比：通常经验风险计算不会占用额外的空间，因为只是计算一个标量（损失的平均值），但在某些情况下，可能需要存储中间结果或梯度信息。</li>
 <li>损失函数L的计算成本：损失函数的复杂度也会影响计算经验风险的效率。简单的损失函数（如均方误差）计算速度较快，而复杂的损失函数（如对比损失或自定义损失函数）可能需要更多的计算资源。</li>
 <li>评估预测器h的成本：模型的复杂度也会影响计算经验风险的效率。复杂模型（如深度神经网络）通常需要更多的计算资源来计算每个样本的预测结果。</li>
 </ul>
 </li>
-<li><p>措施</p>
+<li>
+<p>措施</p>
 <ul>
-<li><p>通过并行化来提高计算效率</p>
+<li>
+<p>通过并行化来提高计算效率</p>
 <blockquote>
 <p>数据并行化：数据集划分，在多个计算节点上并行计算每个块的损失，最后合并结果</p>
 <p>模型并行化：模型的不同部分在不同的计算资源上并行计算</p>
 </blockquote>
 </li>
-<li><p>小批量提速下降：每次只计算一个小批量数据的损失</p>
+<li>
+<p>小批量提速下降：每次只计算一个小批量数据的损失</p>
 </li>
-<li><p>硬件加速：利用 GPU 或 TPU 等硬件加速器来并行计算</p>
+<li>
+<p>硬件加速：利用 GPU 或 TPU 等硬件加速器来并行计算</p>
 </li>
-<li><p>近似计算：使用subsampling来近似计算经验风险，具体见第3点。</p>
+<li>
+<p>近似计算：使用subsampling来近似计算经验风险，具体见第3点。</p>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>近似计算经验风险</p>
+<li>
+<p>近似计算经验风险</p>
 <ul>
 <li>引入随机变量 Z。这个随机变量 Z 代表从经验风险的求和公式中随机采样一个元素的损失值。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608131448887.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608131448887.png" alt=""></p>
 <ul>
-<li>多次独立地抽取 Z 的样本，这些样本的平均值将近似于经验风险 R<del>emp</del></li>
+<li>多次独立地抽取 Z 的样本，这些样本的平均值将近似于经验风险 R~emp~</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608132251370.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608131811334.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608132503301.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608132251370.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608131811334.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608132503301.png" alt=""></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Q：E[Z]是什么意思？</span><br><span class="line">A：表示Z的数学期望。数学期望的定义回顾在上图中。</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>近似计算的开销与样本总数n有关系吗？</p>
+<li>
+<p>近似计算的开销与样本总数n有关系吗？</p>
 <p>根据统计学原理，一组独立随机变量的平均值往往聚集在该随机变量的期望值周围，可以形式化地表述为（强大数定律）：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608133219032.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608133219032.png" alt=""></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Q：大数定律？</span><br><span class="line">A：描述相当多次数重复实验的结果的定律。根据这个定律知道，样本数量越多，则其算术平均值就有越高的概率接近期望。大数定律主要有两种表现形式：弱大数定律和强大数定律。定律的两种形式都肯定无疑地表明，样本均值收敛于真值。具体在下图。</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608133516733.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608133516733.png" alt=""></p>
 </li>
-<li><p>平均值的分布：中心极限定理，当我们有一组独立同分布的随机变量且这些随机变量具有有限的均值和方差时，当抽样次数足够大时，这些随机变量的标准化和中心化的和将近似服从正态分布。N（0，Var(Z)）是一个正态分布，其平均值μ&#x3D;0，方差为Var(Z)。换句话说，随着我们采样更多的 Z，样本平均值会越来越接近真实的期望值 E[Z]，且这种接近的误差按照正态分布分布，其方差随着 K 增加而减小。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608142524378.png"></p>
+<li>
+<p>平均值的分布：中心极限定理，当我们有一组独立同分布的随机变量且这些随机变量具有有限的均值和方差时，当抽样次数足够大时，这些随机变量的标准化和中心化的和将近似服从正态分布。N（0，Var(Z)）是一个正态分布，其平均值μ=0，方差为Var(Z)。换句话说，随着我们采样更多的 Z，样本平均值会越来越接近真实的期望值 E[Z]，且这种接近的误差按照正态分布分布，其方差随着 K 增加而减小。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608142524378.png" alt=""></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Q：这个式子怎么形象理解？</span><br><span class="line">A：如下图（标准化后的经验风险误差的分布情况）。横轴表示标准化后的经验风险的误差值，即上图左边的式子，这是抽样平均值与真实期望值之间的差距，经过标准化处理后的值。纵轴表示概率密度，这个值表示在某个误差值附近的概率密度，反映了误差值出现在该范围内的可能性。综上所述，根据中心极限定理，当样本数量足够大时，标准化后的经验风险误差值将趋于图中的正态分布。正态分布的均值为 0，意味着在大量抽样的情况下，经验风险的近似值会围绕真实期望值波动，且平均误差为 0。正态分布的标准差由Var(Z)决定，表示误差的分散程度。标准差越大，分布越宽，意味着误差波动越大；标准差越小，分布越窄，误差波动越小。</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608143232146.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608143232146.png" alt=""></p>
 </li>
-<li><p>需要多长时间才能得到合适的近似值？</p>
+<li>
+<p>需要多长时间才能得到合适的近似值？</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Q：不太理解，这里概率不等式的意义是什么？为了证明近似计算的正确性，还是为了应用？</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>浓度不等式：能够限制一个有限总和偏离其期望值的概率。</p>
-<p>马尔可夫不等式：如果S是一个非负的随机变量，且具有有限的期望值，则对于任意a&gt;0都有<img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608144503523.png"></p>
-<p>切比雪夫不等式：如果S是一个非负的随机变量，且具有有限的期望值，则对于任意a&gt;0都有<img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608144712705.png"></p>
+<p>马尔可夫不等式：如果S是一个非负的随机变量，且具有有限的期望值，则对于任意a&gt;0都有<img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608144503523.png" alt=""></p>
+<p>切比雪夫不等式：如果S是一个非负的随机变量，且具有有限的期望值，则对于任意a&gt;0都有<img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608144712705.png" alt=""></p>
 <p>霍夫丁不等式：切比雪夫不等式的一个问题，给出的概率并不够小。虽然我们知道这些总和逐渐接近类似高斯分布的东西，但我们期望从期望值偏离一定程度的概率会随着 a 的增加呈指数级下降，因为这是高斯分布的性质。霍夫丁不等式给出了总和尾部概率的一个更紧密的界限。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608145854077.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608145854077.png" alt=""></p>
 <p>其他不等式</p>
 <ul>
 <li>Azuma’s：对非独立同分布也适用</li>
@@ -283,8 +305,9 @@
 </li>
 </ul>
 </li>
-<li><p>想想？</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608150354611.png"></p>
+<li>
+<p>想想？</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/image-20240608150354611.png" alt=""></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Q：怎么才能得到一个比较好的近似？又需要多少次抽样才能得到这种程度的近似？</span><br></pre></td></tr></table></figure></li>
 </ol>
 </article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/Statistics/">Statistics</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/11/CNN-1/" title="CNN(1)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CNN(1)</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/01/index/" title="Instruction"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Instruction</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/06/12/tensor-tutorial/" title="Tensor Tutorial"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-12</div><div class="title">Tensor Tutorial</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Me</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget self_memo" id="self_memo"><div class="item-headline"><i class="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/microsoft_todo_2019_240px.png"></i><span>TodoList</span></div><div class="item-content"><body><textarea rows="6" cols="35" placeholder="今天干什么？"></textarea></body></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lecture-1"><span class="toc-number">1.</span> <span class="toc-text">lecture 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lecture-2"><span class="toc-number">2.</span> <span class="toc-text">lecture 2</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Me</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">理论是灰色的，而生活之树长青。</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
