@@ -1,0 +1,375 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Papers:HPN | 干点啥好呢</title><meta name="author" content="Me"><meta name="copyright" content="Me"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Alibaba HPN: A Data Center Network for Large Language Model Training 概念&#x2F;名词 Equal-Cost Multi-Path  (ECMP)  一种网络负载均衡技术，用于通过多条具有相同代价的路径转发数据包，从而提升网络带宽和容错性。    多路径选择：当从源到目的地有多条路径，而且这些路径的代价（通常根据跳数、带宽、延迟等计算）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Papers:HPN">
+<meta property="og:url" content="http://example.com/2024/09/18/Papers-HPN/">
+<meta property="og:site_name" content="干点啥好呢">
+<meta property="og:description" content="Alibaba HPN: A Data Center Network for Large Language Model Training 概念&#x2F;名词 Equal-Cost Multi-Path  (ECMP)  一种网络负载均衡技术，用于通过多条具有相同代价的路径转发数据包，从而提升网络带宽和容错性。    多路径选择：当从源到目的地有多条路径，而且这些路径的代价（通常根据跳数、带宽、延迟等计算）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg">
+<meta property="article:published_time" content="2024-09-18T08:36:41.000Z">
+<meta property="article:modified_time" content="2024-09-18T08:38:23.448Z">
+<meta property="article:author" content="Me">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="Clos">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/09/18/Papers-HPN/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Papers:HPN',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-18 16:38:23'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.2.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="干点啥好呢"><span class="site-name">干点啥好呢</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Papers:HPN</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-09-18T08:36:41.000Z" title="发表于 2024-09-18 16:36:41">2024-09-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-18T08:38:23.448Z" title="更新于 2024-09-18 16:38:23">2024-09-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/papers/">papers</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h1 id="alibaba-hpn-a-data-center-network-for-large-language-model-training">Alibaba HPN: A Data Center Network for Large Language Model Training</h1>
+<h2 id="概念-名词">概念/名词</h2>
+<h3 id="equal-cost-multi-path-ecmp">Equal-Cost Multi-Path  (ECMP)</h3>
+<blockquote>
+<p>一种网络负载均衡技术，用于通过多条具有相同代价的路径转发数据包，从而提升网络带宽和容错性。</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>多路径选择</strong>：当从源到目的地有多条路径，而且这些路径的代价（通常根据跳数、带宽、延迟等计算）相同，ECMP 允许网络设备（如路由器或交换机）同时使用多条路径进行数据转发。</p>
+</li>
+<li>
+<p><strong>流量分配</strong>：ECMP 通过哈希算法来分配流量。哈希算法会根据<strong>数据包</strong>（网络设备可能需要转发多个数据包）的特定字段（如源地址、目的地址、源端口、目的端口等）生成一个哈希值，然后将数据包分配到这些等价路径中的其中一条。哈希算法的目的是尽量保证数据包流的一致性，使同一个流（例如 TCP 连接）始终走同一条路径，以避免乱序问题。</p>
+</li>
+<li>
+<p><strong>负载均衡</strong>：ECMP 通过在多条路径上分发数据流，达到负载均衡的效果，进而提升网络的吞吐量和资源利用率。</p>
+</li>
+<li>
+<p>优点</p>
+<p><strong>带宽扩展</strong>：通过使用多条路径，网络带宽可以得到有效扩展。</p>
+<p><strong>容错性</strong>：如果一条路径出现故障，ECMP 可以快速切换到其他等价路径，不影响整体网络的连通性。</p>
+<p><strong>效率提高</strong>：ECMP 能在不增加复杂度的情况下，充分利用现有的网络资源。</p>
+</li>
+<li>
+<p>问题：Hash Polarization</p>
+</li>
+</ul>
+<h3 id="hash-polarization">Hash Polarization</h3>
+<p>由于哈希算法的偏差，流量可能集中在某几条路径上，导致流量分布不均匀，无法达到理想的负载均衡。这在大规模数据中心或复杂网络拓扑中尤为明显。</p>
+<ul>
+<li><strong>数据包特征分布不均匀</strong>： 哈希算法依赖于输入数据的特征（例如 IP 地址、端口号等）来计算哈希值。<u>如果输入数据的特征不够随机，可能导致某些特定特征（如某些 IP 地址或端口号）反复映射到同一个哈希值，从而使数据流集中在少数几条路径上。</u>这样，虽然有多条等价路径，但只有部分路径承载了大量流量，其他路径的利用率较低。</li>
+<li><strong>哈希函数设计缺陷</strong>： 理论上，理想的哈希函数应该均匀地将输入映射到不同的输出，但在实际应用中，哈希函数可能存在偏差。<u>某些哈希函数的设计可能无法充分散列输入数据</u>，导致不同路径上的流量分配不均。</li>
+<li><strong>数据流类型单一</strong>： 如果<u>大部分流量来自于相同或类似的源/目的 IP 地址和端口号，哈希算法生成的哈希值会高度集中</u>，进一步加剧流量分布的失衡。这种情况下，即使有多条路径，哈希算法仍然会反复选择某几条路径。</li>
+</ul>
+<h3 id="clos架构">Clos架构</h3>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jmilkfan-fanguiju/p/11825042.html#CLOS_Networking_6">原文地址</a></p>
+<blockquote>
+<p>《A scalable, commodity data center network architecture》明确的提出了一种三级的，被称之为胖树（Fat-Tree）的 CLOS 网络架构，标志着 CLOS 正式进入数据中心网络架构领域，这是 CLOS 网络模型的第三次应用。</p>
+</blockquote>
+<h4 id="clos起源">Clos起源</h4>
+<p>下图展示了一个简单的三级互联架构，包括输入级（左）、中间级、输出级（右）。每个矩形表示一个转发单元，也是一个子模块。</p>
+<p>设m为子模块的输入端口数，n为子模块的输出端口数，r为每一级的子模块数。经过合理重排，只要满足<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mn>2</mn></msub><mo>≥</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy="false">(</mo><msub><mi>m</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>n</mi><mn>3</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r_2 \geq max(m_1, n_3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7859700000000001em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，那么对任意的输入到输出，总能找到一条无阻塞的通路。</p>
+<blockquote>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mn>1</mn></msub><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">m_1=3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span>：表示第一级的子模块的输入端口数</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mn>2</mn></msub><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">m_2=3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span>：表示第二级的子模块的输入端口数</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mn>3</mn></msub><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">m_3=4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span>：表示第三级的子模块的输入端口数</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mn>1</mn></msub><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">n_1=4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span>：表示第一级的子模块的输出端口数</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mn>2</mn></msub><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">n_2=3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span>：表示第二级的子模块的输出端口数</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mn>3</mn></msub><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">n_3=4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span>：表示第三级的子模块的输出端口数</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/20190730121750800.png" alt="original clos"></p>
+<p>核心思想：用多个小规模、低成本的单元构建复杂，大规模的网络。</p>
+<h4 id="switch-fabric">Switch Fabric</h4>
+<p>交换机内部连接输入输出的端口，最简单的 Switch Fabric 架构是 Crossbar 模型，这是一个开关矩阵，每一个 Crosspoint（交点）都是一个开关，交换机通过控制开关来完成输入到特定输出的转发。一个 Crossbar 模型如下所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/20190802161655920.png" alt="Crossbar"></p>
+<p>随着网络规模的发展，交换机的端口数量逐渐增多。Crossbar 模型的交换机的开关密度，也随交换机端口数量 N 呈 <code>O(N^2)</code> 增长。在高密度端口的交换机上，继续采用 Crossbar 模型性价比越来越低。大约在 1990 年代，CLOS 架构被应用到 Switch Fabric。应用 CLOS 架构的交换机的开关密度，与交换机端口数量 N 的关系是 <code>O(N^(3/2))</code>，所以在 N 较大时，CLOS 模型能降低交换机内部的开关密度。这是 CLOS 网络模型的第二次应用。</p>
+<blockquote>
+<p>Crossbar 模型中的每个输入端口都需要和每个输出端口直接相连，因此随着交换机端口数 <strong>N</strong> 增加，所需要的连接数急剧增长。例如，4 个端口需要 16 条连接，8 个端口需要 64 条连接。换句话说，<strong>端口数 N</strong> 每增加一倍，开关密度增加四倍（即 O(N²) 增长）。</p>
+<p>Clos 架构通过分层处理交换任务，避免了 Crossbar 模型中每个输入端口与每个输出端口的直接连接需求，从而将开关密度从 O(N²) 降低到 <strong>O(N^(3/2))</strong>。这种复杂度的降低主要是通过分布式交换来实现的</p>
+</blockquote>
+<h4 id="胖树-fat-tree-型网络架构">胖树（Fat-Tree）型网络架构</h4>
+<p>为了实现网络带宽的无收敛，Fat-Tree 中的每个节点（<strong>根节点除外</strong>）都需要保证上行带宽和下行带宽相等，并且每个节点都要提供对接入带宽的线速转发的能力。</p>
+<p>下图是一个 2 元 4 层 Fat-Tree 的物理结构示例（2 元：每个叶子交换机接入 2 台终端；4 层：网络中的交换机分为 4 层），其使用的所有物理交换机都是完全相同的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/2019073014553366.png" alt="2 元 4 层 Fat-Tree"></p>
+<p>每个叶子节点就是一台物理交换机，接入 2 台终端；上面一层的内部节点，则是每个逻辑节点由 2 台物理交换机组成；再往上面一层则每个逻辑节点由 4 台物理交换机组成；根节点一共有 8 台物理交换机。这样，任意一个逻辑节点，下行带宽和上行带宽是完全一致的。这保证了整个网络带宽是无收敛的。同时我们还可以看到，对于根节点，有一半的带宽并没有被用于下行接入，这是 Fat-Tree 为了支持弹性扩展，而为根节点预留的上行带宽，通过把 Fat-Tree 向根部继续延伸，即可实现网络规模的弹性扩展。</p>
+<blockquote>
+<p>对比根节点和非根节点可知，如内部节点，其中每台交换机上行下行各有两条链路，而根节点中的交换机只有两条下行链路，没有上行，所以说“对于根节点，有一半的带宽并没有被用于下行接入”，为扩展预留了空间。</p>
+</blockquote>
+<p>假设一个k-ary（每个节点有<strong>不超过 k 个子节点</strong>）的三层 Fat-Tree 拓扑，下图展示了k=4的情况。连在同一个接入交换机下的服务器处于同一个子网，他们之间的通信走<strong>二层报文</strong>交换。不同接入交换机下的服务器通信，需要走<strong>路由</strong>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/20190730145909602.png" alt="4-ary"></p>
+<blockquote>
+<ul>
+<li>POD：表示网络结构中的一个基本构建单元。每个 <strong>POD</strong> 是一个包含接入层和汇聚层交换机的小型子网络（即图中下层的一个矩形框），它负责连接终端服务器并通过汇聚交换机与网络的核心交换机层进行通信。</li>
+<li>核心交换机个数：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mfrac><mi>k</mi><mn>2</mn></mfrac><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">(\frac{k}{2})^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2251079999999999em;vertical-align:-0.345em;"></span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></li>
+<li>POD个数：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span></li>
+<li>每个POD汇聚交换机（内部节点）：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>k</mi><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{k}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2251079999999999em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li>每个POD接口交换机（叶节点）：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>k</mi><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{k}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2251079999999999em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li>每个接入交换机连接的终端服务器：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>k</mi><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{k}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2251079999999999em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li>每个接入交换机剩余<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>k</mi><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{k}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2251079999999999em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>个口连接 POD 内<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>k</mi><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{k}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2251079999999999em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>个汇聚交换机，每台核心交换机的第 i 个端口连接到第 i 个 POD，所有交换机均采用 <strong>k-port</strong> switch。</li>
+</ul>
+</blockquote>
+<p><strong>缺陷</strong></p>
+<ul>
+<li>扩展规模在理论上受限于核心层交换机的端口数目</li>
+<li>POD 内部，容错性能差，对底层交换设备故障非常敏感，当底层交换设备故障时，难以保证服务质量</li>
+<li>网络不能很好的支持 One-to-All及 All-to-All 网络通信模式，不利于部署 MapReduce、Dryad 等高性能分布式应用</li>
+<li>交换机与服务器的比值较大，在一定程度上使得网络设备成本依然很高</li>
+</ul>
+<h4 id="叶脊-spine-leaf-网络架构">叶脊（Spine-Leaf）网络架构</h4>
+<p>Spine-Leaf 网络架构，也称为分布式核心网络，由于这种网络架构来源于交换机内部的 Switch Fabric，因此也被称为 Fabric 网络架构，同属于 CLOS 网络模型。事实已经证明，Spine-Leaf 网络架构可以提供高带宽、低延迟、非阻塞的服务器到服务器连接。</p>
+<p>Leaf Spine 只有两层，这是因为：网络架构中的设备基本都是<strong>双向流量</strong>，输入设备同时也是输出设备，因此三级 CLOS 沿着中间层对折，就得到了两层的网络架构。可以看出传统的三层网络架构是垂直的结构，而 Spine-Leaf 网络架构是扁平的结构，从结构上看，Spine-Leaf 架构更易于水平扩展。</p>
+<blockquote>
+<p><strong>L3 交换机</strong>（Layer 3 Switch）和 <strong>L2 交换机</strong>（Layer 2 Switch）主要的区别在于它们在网络协议栈中处理数据的层级不同。</p>
+<p><strong>Switch</strong>：</p>
+<ul>
+<li><strong>Leaf Switch</strong>：相当于传统三层架构中的接入交换机，作为 TOR（Top Of Rack）直接连接物理服务器。与接入交换机的区别在于 L2/L3 网络的分界点现在在 Leaf 交换机上了。Leaf 交换机之上是三层网络，Leaf 交换机之下都是个独立的 L2 广播域。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/20190802164813148.jpg" alt="在这里插入图片描述"></p>
+<ul>
+<li><strong>Spine Switch</strong>：相当于核心交换机。Spine 和 Leaf 交换机之间通过 ECMP（Equal Cost Multi Path）动态选择多条路径。区别在于，Spine 交换机现在只是为 Leaf 交换机提供一个弹性的 L3 路由网络，数据中心的南北流量可以不用直接从 Spine 交换机发出，一般来说，南北流量可以从与 Leaf 交换机并行的交换机（edge switch）再接到 WAN router 出去。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/20190802163054727.jpg" alt="在这里插入图片描述"></p>
+<p>Fabric 中的 Leaf 层由接入交换机组成，用于接入服务器，Spine 层是网络的骨干（Backbone），负责将所有的 Leaf 连接起来。每个低层级的 Leaf 交换机都会连接到每个高层级的 Spine 交换机上，即每个 Leaf 交换机的上行链路数等于 Spine 交换机数量，同样，每个 Spine 交换机的下行链路数等于 Leaf 交换机的数量，形成一个 Full-Mesh 拓扑。当 Leaf 层的接入端口和上行链路都没有瓶颈时，这个架构就实现了<strong>无阻塞（Nonblocking）</strong>。并且，因为任意跨 Leaf 的两台服务器的连接，都会经过相同数量的设备，所以保证了<strong>延迟是可预测的</strong>，因为一个包只需要经过一个 Spine 和另一个 Leaf 就可以到达目的端。</p>
+<p>因为 Fabric 中的每<strong>个 Leaf 都会连接到每个 Spine</strong>，所以，如果一个 Spine 挂了，数据中心的吞吐性能只会有轻微的下降（Slightly Degrade）。如果某个链路的流量被打满了，Spline-Leaf 的<strong>扩容过程也很简单</strong>：添加一个 Spine 交换机就可以扩展每个 Leaf 的上行链路，增大了 Leaf 和 Spine 之间的带宽，缓解了链路被打爆的问题。如果接入层的端口数量成为了瓶颈，那就直接添加一个新的 Leaf，然后将其连接到每个 Spine 并做相应的配置即可。这种易于扩展（Ease of Expansion）的特性优化了 IT 部门扩展网络的过程。</p>
+</blockquote>
+<h3 id="top-of-rack-tor">Top of Rack(ToR)</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37592750/article/details/133833462">原文链接</a></p>
+<p>TOR（Top of Rack）指的是在<strong>每个服务器机柜上部署1～2台交换机</strong>，<strong>服务器直接接入到本机柜的交换机上</strong>，实现服务器与交换机在机柜内的互联。虽然从字面上看，Top of Rack指的是“机柜顶部”，但实际TOR的核心在于将交换机部署在服务器机柜内，既可以部署在机柜顶部，也可以部署在机柜的中部（Middle of Rack）或底部（Bottom of Rack），如图所示。通常而言，将交换机部署在机柜顶部是最有利于走线的，因此这种架构应用最多。</p>
+<p><strong>单点故障</strong></p>
+<p>主要是因为 ToR 交换机在数据中心网络中通常是<strong>第一层接入交换设备</strong>，它连接了一个机架中的所有服务器。因此，一旦 ToR 交换机出现故障，连接到该交换机的所有服务器都将失去与网络的连接，导致整台机架中的服务中断。</p>
+<blockquote>
+<p><strong>同步需求：</strong> LLM训练中的同步要求所有<strong>要求 GPU 以同步方式完成迭代</strong>。如果某一个GPU或交换机出现故障，可能会导致整个训练过程的同步被打断，影响训练的稳定性和效率。</p>
+<p><strong>单点故障：</strong> 在数据中心的网络架构中，ToR交换机通常负责连接同一机架中的所有服务器（或GPU）。如果ToR交换机发生故障，这个机架中的所有设备可能都会受到影响，导致训练过程的中断。</p>
+</blockquote>
+<h2 id="研究背景与问题">研究背景与问题</h2>
+<blockquote>
+<p>LLM训练需要大规模的分布式训练集群，大量GPU。在这样的条件下，由于其本身的特性，LLM对数据中心网络提出了新的要求。</p>
+</blockquote>
+<ol>
+<li>
+<p><strong>Traffic Patterns</strong></p>
+<ul>
+<li>
+<p>从<code>entropy</code>和<code>traffic</code>上看，LLM训练与一般云计算模式存在不同</p>
+<blockquote>
+<p>在网络中，<code>entropy</code>（熵）通常反映了<code>traffic</code>（流量）的多样性和不可预测性。熵越高，意味着流量的模式更加不规则，网络的行为更加复杂，负载在网络中的分布不均匀性更高。反之，低熵意味着网络流量比较集中或模式化，容易预测和管理。</p>
+</blockquote>
+<ul>
+<li>云计算平台上通常存在大量的小流量 (Mice Flows) 和少量的大流量 (Elephant Flows)。这些小流量占据了绝大多数的网络流量，它们的传输数据量较小且时间短，典型情况下并不会占满网络接口卡 (NIC) 的带宽。因此，每个流的带宽利用率较低，通常低于 20% 的 NIC 容量。</li>
+<li>在 LLM 训练中，涉及的节点数较多，但每个节点之间的通信流量相对较少且集中。相比于云计算环境中众多的小流量，LLM 训练通常只涉及几个主要流，这些流量往往集中在少数的计算节点之间进行大规模数据交换。LLM 训练涉及大量的数据传输，特别是在模型参数同步和梯度传输时，这些传输操作通常在每次迭代完成后进行，并且是短时间内的大规模数据交换。因此，流量表现为<strong>周期性的突发</strong>。由于 LLM 训练产生的流量虽然少但数据量大，当突发流量发生时，网络需要在短时间内处理大量的数据传输，导致网络资源（如 NIC 和链路带宽）被高效利用。</li>
+</ul>
+</li>
+<li>
+<p>由于上述原因，传统数据中心网络使用的ECMP负载均衡方案不再适合于LLM训练场景。</p>
+<blockquote>
+<p><code>high entropy</code>：意味着有大量随机的、小流量，流量目标和源头不固定，哈希算法能够有效地分散这些小流量，均衡多条路径的负载。</p>
+<p><code>low utilization</code>：每个流量的带宽需求较小，使得即使多个流量分配到同一条路径，也不会导致严重的拥塞或超载。</p>
+<p><code>low entropy &amp; high utilization</code>：如果有多个高利用率的流被哈希分配到同一条路径，由于这些流量占用了大部分带宽资源，容易造成路径拥堵。高利用率流量的数量少但带宽需求大，这意味着即使 ECMP 尝试分配流量到不同路径，也有可能造成某些路径承载过多流量，而其他路径利用率较低。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Higher sensitivity to faults, especially singlepoint failures</strong></p>
+<ul>
+<li>
+<p>LLM训练的同步性</p>
+<p>LLM训练中，GPUs需要合作完成一系列迭代，是一个同步的过程（上传、下载、聚合梯度），任何GPU的异常都可能使得训练进程被拖慢甚至崩溃。因此，LLM训练比传统云计算过程对故障更为敏感。</p>
+</li>
+<li>
+<p>ToR单点故障</p>
+<p>ToR 交换机在数据中心网络中通常是<strong>第一层接入交换设备</strong>，它连接了一个机架中的所有服务器。因此，一旦 ToR 交换机出现故障，连接到该交换机的所有服务器都将失去与网络的连接，导致整台机架中的服务中断。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="本文贡献">本文贡献</h2>
+<p>HPN：为LLM训练服务的高性能网络</p>
+<ol>
+<li>
+<p>提出了一个全新的ToR部署方案（<code>i.e.“即”</code>, the non-stacked  dual-ToR design），通过取消两交换机之间的直接同步机制，每台ToR交换机独立处理流量，进一步提高了网络架构的稳定性，解决ToR单点故障问题。</p>
+<blockquote>
+<p>传统的双ToR设计是由交换机厂商提出的，通常采用<strong>堆叠方式</strong>，即两台ToR交换机直接相互连接，并通过同步机制（如共享配置、状态信息等）来实现。</p>
+<ul>
+<li><strong>优点</strong>：这种设计确保了两台ToR交换机协同工作，确保机架的高可用性。服务器可以同时连接两台ToR交换机，当一台ToR故障时，另一台可以立即接管网络流量。</li>
+</ul>
+<p><strong>缺点</strong>：这种堆叠方式依赖两台交换机之间的<strong>直接同步</strong>。如果同步机制出现问题，或者同步链路故障，可能导致两台ToR之间的不一致，反而会增加故障的可能性。</p>
+</blockquote>
+</li>
+<li>
+<p>通过采用51.2Tbps交换芯片（这一技术改进可以支持极高的数据吞吐量）、利用轨道优化网络，网络接入层能够容纳1K个GPU，其中绝大部分（96.3%）的训练任务能够获得最佳的网络性能。</p>
+</li>
+<li>
+<p><strong>HPN</strong>能够在<strong>2层双平面架构</strong>中支持<strong>15K个GPU</strong>，这与传统的大规模训练集群规模一致，而无需使用复杂的<strong>3层Clos架构</strong>。</p>
+<blockquote>
+<ul>
+<li>使用2层双平面架构的另一个好处是**显著减少了ECMP（等价多路径）*<em>的发生。**ECMP**通常用于在多个等价路径之间均衡流量，但在一些情况下可能会导致*<em>哈希极化</em></em>，即流量分配不均。</li>
+<li>在选择用于传输大流量（如elephant flows）的理想路径时，HPN 的设计还<strong>减少了1-2个数量级</strong>的路径搜索空间。这使得网络在处理大数据流时更加高效，能够更快找到合适的传输路径，避免拥塞。</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/LLM/">LLM</a><a class="post-meta__tags" href="/tags/Clos/">Clos</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/09/17/Papers-MCCS/" title="Papers:MCCS"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Papers:MCCS</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Me</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget self_memo" id="self_memo"><div class="item-headline"><i class="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/microsoft_todo_2019_240px.png"></i><span>TodoList</span></div><div class="item-content"><head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>none</title> <style> body, html { margin: 0; padding: 0; width: 100%; height: 100%; } textarea { width: 100%; height: 100%; box-sizing: border-box; /* 包括内边距和边框在内的宽度和高度计算 */ } </style> </head> <body> <textarea placeholder="今天干什么？"></textarea> </body></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#alibaba-hpn-a-data-center-network-for-large-language-model-training"><span class="toc-number">1.</span> <span class="toc-text">Alibaba HPN: A Data Center Network for Large Language Model Training</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-%E5%90%8D%E8%AF%8D"><span class="toc-number">1.1.</span> <span class="toc-text">概念&#x2F;名词</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#equal-cost-multi-path-ecmp"><span class="toc-number">1.1.1.</span> <span class="toc-text">Equal-Cost Multi-Path  (ECMP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hash-polarization"><span class="toc-number">1.1.2.</span> <span class="toc-text">Hash Polarization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clos%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.3.</span> <span class="toc-text">Clos架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#clos%E8%B5%B7%E6%BA%90"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">Clos起源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#switch-fabric"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">Switch Fabric</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%83%96%E6%A0%91-fat-tree-%E5%9E%8B%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">胖树（Fat-Tree）型网络架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%B6%E8%84%8A-spine-leaf-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">叶脊（Spine-Leaf）网络架构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#top-of-rack-tor"><span class="toc-number">1.1.4.</span> <span class="toc-text">Top of Rack(ToR)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF%E4%B8%8E%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">研究背景与问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E6%96%87%E8%B4%A1%E7%8C%AE"><span class="toc-number">1.3.</span> <span class="toc-text">本文贡献</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Me</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">理论是灰色的，而生活之树长青。</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const initGitalk = () => {
+    const gitalk = new Gitalk(Object.assign({
+      clientID: 'Ov23lio2nMSomBJQPuq6',
+      clientSecret: '469dcc3d58b8291831d2e1810da0fe0de578b8c0',
+      repo: 'comments',
+      owner: 'Whatasmallship',
+      admin: ['Whatasmallship'],
+      id: '147579aaa28b72041919e84e4190ce1b',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async() => {
+    if (typeof Gitalk === 'function') initGitalk()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js')
+      initGitalk()
+    }
+  }
+  
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  if ('Gitalk' === 'Gitalk' || !true) {
+    if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
