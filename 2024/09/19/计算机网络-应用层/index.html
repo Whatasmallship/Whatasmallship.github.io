@@ -1,0 +1,473 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>计算机网络:应用层 | 干点啥好呢</title><meta name="author" content="Me"><meta name="copyright" content="Me"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="应用层：协议原理 如何创建一个新的网络应用？  编程：  应用在不同的端系统上运行：网络应用只在用户的设备或服务器上执行。 通过网络基础设施提供的服务，应用进程之间进行通信。例如，Web服务器软件与浏览器进行交互，传递网页数据。   网络核心没有应用层软件：  网络核心只负责数据传输：它不执行任何应用层软件，也不处理应用层功能。 网络应用只存在于端系统：所有应用功能和逻辑都在端系统中实现，不需要对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络:应用层">
+<meta property="og:url" content="http://example.com/2024/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%BA%94%E7%94%A8%E5%B1%82/">
+<meta property="og:site_name" content="干点啥好呢">
+<meta property="og:description" content="应用层：协议原理 如何创建一个新的网络应用？  编程：  应用在不同的端系统上运行：网络应用只在用户的设备或服务器上执行。 通过网络基础设施提供的服务，应用进程之间进行通信。例如，Web服务器软件与浏览器进行交互，传递网页数据。   网络核心没有应用层软件：  网络核心只负责数据传输：它不执行任何应用层软件，也不处理应用层功能。 网络应用只存在于端系统：所有应用功能和逻辑都在端系统中实现，不需要对">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg">
+<meta property="article:published_time" content="2024-09-19T08:33:01.000Z">
+<meta property="article:modified_time" content="2024-09-19T08:33:22.236Z">
+<meta property="article:author" content="Me">
+<meta property="article:tag" content="？">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%BA%94%E7%94%A8%E5%B1%82/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '计算机网络:应用层',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-19 16:33:22'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.2.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="干点啥好呢"><span class="site-name">干点啥好呢</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">计算机网络:应用层</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-09-19T08:33:01.000Z" title="发表于 2024-09-19 16:33:01">2024-09-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-19T08:33:22.236Z" title="更新于 2024-09-19 16:33:22">2024-09-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h1 id="应用层：协议原理">应用层：协议原理</h1>
+<p>如何创建一个新的网络应用？</p>
+<ol>
+<li><strong>编程</strong>：
+<ul>
+<li>应用在不同的端系统上运行：网络应用只在用户的设备或服务器上执行。</li>
+<li>通过网络基础设施提供的服务，应用进程之间进行通信。例如，Web服务器软件与浏览器进行交互，传递网页数据。</li>
+</ul>
+</li>
+<li><strong>网络核心没有应用层软件</strong>：
+<ul>
+<li>网络核心只负责数据传输：它不执行任何应用层软件，也不处理应用层功能。</li>
+<li>网络应用只存在于端系统：所有应用功能和逻辑都在端系统中实现，不需要对网络核心进行改动。</li>
+<li>快速的开发和部署：由于网络核心无需处理应用层逻辑，网络应用的开发和部署过程更为高效。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="网络应用的体系结构">网络应用的体系结构</h2>
+<p>可能的应用架构：</p>
+<ul>
+<li>客户-服务器模式 (C/S: Client/Server)</li>
+<li>对等模式 (P2P: Peer-to-Peer)</li>
+<li>混合模式：客户-服务器和对等体系结构的组合</li>
+</ul>
+<h3 id="c-s模式">C/S模式</h3>
+<p>服务器：</p>
+<ul>
+<li>一直运行</li>
+<li><strong>固定的IP地址</strong>和周知的<strong>端口号（约定）</strong></li>
+<li>扩展性：  服务器场
+<ul>
+<li>数据中心进行扩展</li>
+<li>扩展性差</li>
+</ul>
+</li>
+</ul>
+<p>客户端：</p>
+<ul>
+<li>主动与服务器通信</li>
+<li>与互联网有间接性的连接</li>
+<li>可能是<strong>动态IP地址</strong></li>
+<li>不直接与其他客户端通信</li>
+</ul>
+<blockquote>
+<p>问题：</p>
+<ol>
+<li>传统的<strong>单一服务器架构</strong>可能存在扩展性限制。当负载增加时，单一服务器可能无法应对大量请求（达到一定阈值，性能断崖式下降）。</li>
+<li>可靠性差：一台服务器负责大量客户端，一旦宕机，大量请求无法响应。</li>
+<li>注意与P2P模式对比：随着用户规模增加，请求服务的节点增加，但是提供服务的节点也在增加，所以很容易扩容。</li>
+</ol>
+</blockquote>
+<h3 id="p2p">P2P</h3>
+<p>对等体（P2P）体系结构：</p>
+<ul>
+<li><strong>几乎没有一直运行的服务器</strong>：对等体体系结构中，节点通常不依赖于持续运行的中央服务器。</li>
+<li><strong>任意端系统之间可以进行通信</strong>：所有节点可以直接互相通信，无需中央控制。</li>
+<li><strong>每一个节点既是客户端又是服务器</strong>：每个节点同时承担请求和提供服务的功能。
+<ul>
+<li><strong>自扩展性</strong>：新的Peer节点可以带来新的服务能力，并且也会引入新的服务请求。</li>
+</ul>
+</li>
+<li><strong>参与的主机可能连接且可以改变IP地址</strong>：节点的IP地址可能会变化，网络连接情况也可能会变化。
+<ul>
+<li><strong>难以管理</strong>：由于节点的动态性和分布性，对等体网络难以集中管理。</li>
+</ul>
+</li>
+<li><strong>例子</strong>：Gnutella, 迅雷</li>
+</ul>
+<h3 id="混合模式-c-s-p2p">混合模式（C/S+P2P）</h3>
+<p><strong>Napster</strong></p>
+<ul>
+<li>
+<p><strong>文件搜索：集中</strong></p>
+<ul>
+<li>主机在<strong>中心服务器</strong>上注册其资源（主机的IP）。</li>
+<li>主机向<strong>中心服务器</strong>查询资源位置。</li>
+</ul>
+</li>
+<li>
+<p><strong>文件传输：P2P</strong></p>
+<ul>
+<li>任意Peer节点之间进行文件传输。</li>
+</ul>
+</li>
+</ul>
+<p><strong>即时通信</strong></p>
+<ul>
+<li>
+<p><strong>在线检测：集中</strong></p>
+<ul>
+<li>当用户上线时，向中心服务器注册其IP地址。</li>
+<li>用户与中心服务器联系，以找到其在线好友的位置。</li>
+</ul>
+</li>
+<li>
+<p><strong>两个用户之间聊天：P2P</strong></p>
+</li>
+</ul>
+<h2 id="进程通信">进程通信</h2>
+<ul>
+<li>
+<p>进程：主机上运行的应用程序</p>
+<ul>
+<li>在同一主机内，使用操作系统定义的进程间通信机制进行通信。</li>
+<li>在不同主机上，通过交换报文（Message）来进行通信。
+<ul>
+<li>使用<strong>OS</strong>提供的通信服务。</li>
+<li>按照<strong>应用协议</strong>交换报文。
+<ul>
+<li>依赖传输层提供的服务进行通信。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>客户端进程</strong>：</p>
+<ul>
+<li>负责发起通信请求。</li>
+</ul>
+</li>
+<li>
+<p><strong>服务器进程</strong>：</p>
+<ul>
+<li>等待连接的进程。</li>
+</ul>
+</li>
+<li>
+<p><strong>注意</strong>：</p>
+<ul>
+<li>
+<p>P2P架构的应用也使用客户端进程和服务器进程之分。</p>
+<blockquote>
+<p>在某个会话上，有请求和响应之分，因此也有客户端进程和服务器进程之分。当然，跨会话来说，一个进程可能是客户端进程，也可能是服务器进程。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="分布式进程通信需要解决的问题">分布式进程通信需要解决的问题</h3>
+<ul>
+<li>
+<p><strong>问题1</strong>：进程标识和寻址问题（服务用户）</p>
+<blockquote>
+<p>应用进程需要标识自己（唯一的），而且需要具备寻址的作用。</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>措施：对进程进行编址</strong></p>
+<blockquote>
+<p><strong>进程标识</strong>：为了接收报文，进程必须有一个标识，即服务接入点（SAP）。发送报文也需要标识，以便正确地发送到目标进程。</p>
+<ul>
+<li><strong>主机标识</strong>：每台主机都有一个唯一的32位IP地址。</li>
+<li><strong>协议</strong>：所采用的传输层协议</li>
+<li><strong>进程标识</strong>：仅有IP地址无法标识单个进程，因为在端系统上可能有许多应用进程在同时运行。为了区分不同进程，需要使用TCP/UDP的端口号（Port Numbers）。</li>
+</ul>
+<p><strong>传输层协议</strong>：</p>
+<ul>
+<li><strong>TCP或UDP</strong>：进程间的通信依赖于传输层协议，如TCP（传输控制协议）或UDP（用户数据报协议）。</li>
+<li>端口号：通过端口号来进一步区分在同一主机上的不同进程。端口号帮助将数据正确地路由到目标进程。</li>
+<li>一些知名端口号的例子：
+<ul>
+<li>HTTP: TCP 80</li>
+<li>Mail: TCP 25</li>
+<li>FTP: TCP 21</li>
+</ul>
+</li>
+</ul>
+<p><strong>进程标识的组合</strong>：一个进程通过IP地址和端口号的组合来标识，这样可以唯一地指定端系统上的一个进程。</p>
+<ul>
+<li><strong>端节点</strong>（end point）：本质上，两个主机之间的通信由两个端节点组成，每个端节点由主机的IP地址和端口号标识。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>问题2</strong>：传输层-应用层提供服务的方式（服务）</p>
+<blockquote>
+<p>应用层的下层提供的服务是什么形式？具体来说，就是socket和对应api。</p>
+</blockquote>
+<ul>
+<li>
+<p>位置：层间界面的服务接入点（SAP，例如 TCP/IP 的 socket）</p>
+</li>
+<li>
+<p>形式：应用程序接口（API，例如 TCP/IP 的 socket API）</p>
+</li>
+<li>
+<p><strong>措施：传输层提供的服务-需要穿过层间的信息</strong></p>
+<blockquote>
+<p><strong>层间接口必须携带的信息</strong></p>
+<ul>
+<li>
+<p>要传输的报文（对本层来说：SDU）</p>
+</li>
+<li>
+<p>谁传的：对方的应用进程的标识（IP+TCP/UDP PORT）</p>
+</li>
+<li>
+<p>传给谁：对方的应用进程的标识（同上）</p>
+</li>
+<li>
+<p><strong>层间接口</strong>：用于通信的层间接口通常需要明确的标识，以确保数据的正确传输。接口定义了如何通过网络协议传递信息。</p>
+</li>
+</ul>
+<p><strong>传输层实体</strong>（TCP或UDP实体）</p>
+<ul>
+<li>
+<p>根据这些信息进行报文段的封装</p>
+</li>
+<li>
+<p>源端口号，目标端口号，数据等</p>
+</li>
+<li>
+<p>将IP地址往下交给IP实体，用于封装IP数据报（源IP、目标IP）</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>Socket API 传输报文信息</strong>：</p>
+<ul>
+<li>
+<p>如果每次通过Socket API传输报文时都附加额外的信息，可能会导致操作复杂、容易出错，并且不便于管理。</p>
+</li>
+<li>
+<p><strong>Socket 标识通信</strong>：</p>
+</li>
+<li>
+<p>使用一个代号来标识通信的双向或单向连接，称为socket。</p>
+</li>
+<li>
+<p>类似于操作系统打开文件时返回的句柄，socket也可以被视为对通信端点的标识符。</p>
+</li>
+<li>
+<p><strong>TCP Socket</strong>：</p>
+</li>
+<li>
+<p><strong>连接建立</strong>：在TCP服务中，两个进程之间的通信需要在开始之前建立连接。进程间通信会持续一段时间，通信关系稳定。</p>
+</li>
+<li>
+<p><strong>连接标识</strong>：可以使用一个唯一标识符（一个整数）来表示两个通信实体之间的连接。之后使用这个整数就表示了这样一个socket。</p>
+</li>
+<li>
+<p><strong>传输信息</strong>：通过层间接口传输的信息较少，简化了数据传输过程。</p>
+</li>
+<li>
+<p><strong>TCP Socket 细节</strong>：</p>
+</li>
+<li>
+<p><strong>IP 地址和端口</strong>：TCP socket使用源IP地址、目标IP地址、源端口号和目标端口号来标识通信的端点。(四元组)</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>TCP 之上的套接字（Socket）</strong>：</p>
+<ul>
+<li><strong>4元组标识</strong>：对于使用面向连接服务（TCP）的应用而言，套接字是四元组的一个具有本地意义的标识。</li>
+<li><strong>会话标识</strong>：这个4元组唯一指定了一个会话，即两个进程之间的通信关系。</li>
+<li><strong>通信使用</strong>：通过这个4元组，应用程序可以与远程应用进程进行通信，而不需要在每次发送报文时都指定这4元组。</li>
+<li><strong>简化管理</strong>：使用这种标识方式使得通信管理更加简便和高效。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>问题3</strong>：如何使用传输层提供的服务，实现应用进程之间的报文交换（服务用户使用）</p>
+<blockquote>
+<p>收到报文时应该做出什么动作？因此要定义协议、编程实现。</p>
+</blockquote>
+<ul>
+<li>定义应用层协议：报文格式、解释、时序等</li>
+<li>编写程序，使用操作系统提供的 API，调用网络基础设施提供的通信服务传输报文，实现应用时序等</li>
+<li>措施：</li>
+</ul>
+</li>
+</ul>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%EF%BC%9F/">？</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/09/18/Papers-HPN/" title="Papers:HPN"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Papers:HPN</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/09/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1%E5%92%8C%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B/" title="计算机网络:协议层次和服务模型"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-16</div><div class="title">计算机网络:协议层次和服务模型</div></div></a></div><div><a href="/2024/09/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%88%86%E7%BB%84%E5%BB%B6%E6%97%B6%E3%80%81%E4%B8%A2%E5%A4%B1%E5%92%8C%E5%90%9E%E5%90%90%E9%87%8F/" title="计算机网络:分组延时、丢失和吞吐量"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-16</div><div class="title">计算机网络:分组延时、丢失和吞吐量</div></div></a></div><div><a href="/2024/09/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-Internet%E7%BB%93%E6%9E%84%E5%92%8CISP/" title="计算机网络:Internet结构和ISP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-16</div><div class="title">计算机网络:Internet结构和ISP</div></div></a></div><div><a href="/2024/09/09/POST-Fine-tuning-%E8%AE%AD%E7%BB%83%E5%92%8C%E6%8E%A8%E7%90%86%EF%BC%88Training-vs-Inference%EF%BC%89/" title="POST:Fine-tuning - 训练和推理（Training vs Inference）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-09</div><div class="title">POST:Fine-tuning - 训练和推理（Training vs Inference）</div></div></a></div><div><a href="/2024/09/09/POST-%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%B8%8E%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" title="POST:交换机工作原理与基本配置"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-09</div><div class="title">POST:交换机工作原理与基本配置</div></div></a></div><div><a href="/2024/09/09/POST-AI%E8%8A%AF%E7%89%87%E7%AE%97%E5%8A%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="POST:AI芯片算力基础知识"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-09</div><div class="title">POST:AI芯片算力基础知识</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/4a19190013a4b3f98d0370f6645db29.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Me</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget self_memo" id="self_memo"><div class="item-headline"><i class="https://cdn.jsdelivr.net/gh/Whatasmallship/imgbed-for-self-blog/wallpaper/microsoft_todo_2019_240px.png"></i><span>TodoList</span></div><div class="item-content"><head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>none</title> <style> body, html { margin: 0; padding: 0; width: 100%; height: 100%; } textarea { width: 100%; height: 100%; box-sizing: border-box; /* 包括内边距和边框在内的宽度和高度计算 */ } </style> </head> <body> <textarea placeholder="今天干什么？"></textarea> </body></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%EF%BC%9A%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">应用层：协议原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">网络应用的体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#c-s%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text">C&#x2F;S模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p2p"><span class="toc-number">1.1.2.</span> <span class="toc-text">P2P</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E5%90%88%E6%A8%A1%E5%BC%8F-c-s-p2p"><span class="toc-number">1.1.3.</span> <span class="toc-text">混合模式（C&#x2F;S+P2P）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="toc-number">1.2.</span> <span class="toc-text">进程通信</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1%E9%9C%80%E8%A6%81%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.1.</span> <span class="toc-text">分布式进程通信需要解决的问题</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Me</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">理论是灰色的，而生活之树长青。</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const initGitalk = () => {
+    const gitalk = new Gitalk(Object.assign({
+      clientID: 'Ov23lio2nMSomBJQPuq6',
+      clientSecret: '469dcc3d58b8291831d2e1810da0fe0de578b8c0',
+      repo: 'comments',
+      owner: 'Whatasmallship',
+      admin: ['Whatasmallship'],
+      id: 'e9c45c8a5c7f5403c35bfaeab763db08',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async() => {
+    if (typeof Gitalk === 'function') initGitalk()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js')
+      initGitalk()
+    }
+  }
+  
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  if ('Gitalk' === 'Gitalk' || !true) {
+    if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
